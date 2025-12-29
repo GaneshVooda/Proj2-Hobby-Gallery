@@ -50,3 +50,95 @@
   </main>
 </body>
 </html>
+
+
+ln -s /opt/tomcat/bin/startup.sh /usr/bin/tomcat-start
+
+ sudo nano /opt/tomcat/webapps/manager/META-INF/context.xml
+ sudo nano /opt/tomcat/conf/server.xml
+
+mvn archetype:generate \
+-DarchetypeGroupId=org.apache.maven.archetypes \
+-DarchetypeArtifactId=maven-archetype-webapp \
+-DarchetypeVersion=1.4 \
+-DgroupId=com.DeployToContainer \
+-DartifactId=DeployToContainer \
+-DinteractiveMode=false \
+-U
+cd /opt/tomcat/conf
+cd helloworld/target
+ cp helloworld.war /opt/tomcat/webapps
+
+ cd /opt/tomcat/webapps/helloworld/
+nano index.jsp
+https://dlcdn.apache.org/tomcat/tomcat-11/v11.0.15/bin/apache-tomcat-11.0.15.tar.gz
+https://dlcdn.apache.org/maven/maven-3/3.9.12/binaries/apache-maven-3.9.12-bin.tar.gz
+
+
+ <role rolename="manager-gui"/>
+  <role rolename="manager-script"/>
+  <user username="tomcatgui" password="tomcatguipwd" roles="manager-gui"/>
+  <user username="tomcatscript" password="tomcatscriptpwd" roles="manager-script"/>
+
+usermod -aG root ec2-user
+chmod -R g+w /opt/tomcat/webapps/
+
+wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+Do
+FROM tomcat:latest
+RUN cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps/
+COPY registration-form.war /usr/local/tomcat/webapps/
+
+docker build -t tomcat .
+docker run -d --name tomcat-container -p 8081:8080 tomcat
+
+
+     <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Hobby Gallery</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Welcome to My Hobby Gallery</h1>
+    <p>Here are a few of my favorite hobbies that I enjoy in my free time.</p>
+  </header>
+
+  <main class="gallery">
+    <section class="hobby">
+      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTEhMVFRUVFRUVFxIVFRUWFRUVFxUWFhUVFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGhAQGi0fHR0tLS0tLS0tLS0rLS0tLS0tLS0tLS0tLS0tLS0tLS4tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIALwBDAMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAAFAQIDBAYABwj/xABBEAABAwEGAwUGAggEBwAAAAABAAIDEQQSEyExQQVRYQYicZGhFDKBwdHwUrEHFUJicoKS4TNDU+IXI2STosLS/8QAGgEAAwEBAQEAAAAAAAAAAAAAAAECAwQFBv/EACERAAIDAAICAwEBAAAAAAAAAAABAhESAyExQQQTUSIU/9oADAMBAAIRAxEAPwCzG1TMiBXQhW4gobNVHohji2Ups6sRsVtsXNQ5lJA9kCk9mV8QUU8MSnZWQSLMpJbP0RMwZp0kKNhQEMCjdCjbrPkq74aLSMyWgM+BMNmRttnBzKgliWimZOIGfEozGij7MoDZ1qmZSRSupt1XsFJgq0yGig5qjMaJGNNwVSZLQOwilMKI4S7BTTJYNwl2CiWCuMSqyQZgJMBFMFIYk7EDfZ1xsyImPokw0WIHez9F3s6I4a4xJiBphTTEiWAkMCYgWYUmAimCkwkxAzAXYKJYK7BTAINiPJTxsU0QVlka8RyPZoZE1XI27Lo4lbhjWTkWvA2KNTxwKeOAK3HDVIGym6zpJLOieCldAqSZLkBpIFB7KjToKqvLHyVWIDyw8lWfZyjLoVA+NXGRLBJgKidAUWewqIxlbKRm4gowphiRR0BTfZ1qpGTQLwUuEieAkwVWiGgZgLsFE8E8lwsxT0TQLwUos6LtsqcIRyRsMggWbouMHVFXQdCmGEck9CcQZht6pMPoiWEOSTCCpSJoG4fRIYUTwUmAnoWQbgJDZ0T9nXYIRoWQX7OuwOiK4YSYaehZBWCkwCipjTcFVoVBNvD4APecOpDvorGBZ9nEeFfmFXGJzd5lSBpOpJ8Svn7f6e2WhZ4j7rj/AEkhSx2YfjHqooi7S8VYiYmmSSRQq9EzmoImq21b8UU2ZTYtEpSLl10jGyOSNVZWK8oZQsOSNGsGDZI1A6NEn+Cru8FlZYPdGmFhV9zUwsWiZLRRw0mErxjXYatSIaKOEniLorWGluJ6JortiHglwVPhLsJOxUQFg5HxSXBtVWhD1ThH90TsKKJZ4pMBX8JdhBPQsg42dI6z+KJGNJhp7FgGGzpPZyimElw+if2CwCcApMFFsLokw+ia5CXAF4CUWdEjH0XYfRPYYB3s6dgDl6q/hLsJGwwOa13NODSdSqjZTzHontlPMLw1M9TJdbD4J7QPsFVWz9B6qWOc9fQ/mqUyXFlxhH2FYa4KoLRz/IKRko+x/ddXHyJGMossLk0SLr66vtiZZY5MkpzSX+qY/wAVlPktFRjTGmnMeqicwcx5p7h4eSS6z8I9Vho0GezrvZVxjbtT1TmmmgHmjYUMMAGqhkdT9n41CtXzy9VwHRPTCig+QjYffxTcd34Qfg5ETGo32cHXPzRphSB5tEn4PT+6aLTJuwK4+xA/ZUL+H9R6oU2OkRstT/wDzP1SutjtLoHiSo3WIj8JUfsx5D1VKYsoti0O5N/8/olNoNNB4XSqzISN/IlPDXbE+ZT0xZRIJ3ciK8wPmlbeO/qEzv8AP1S4r0aYUiQtJ1f60+a72YHMur8VCZXpmJJ9gKuw6LYgbpU+afgt5nzVAl/NObK8fZToRfEY6+aXIclQxn/ZKTFd9kooC+Ul1UTM5MxHclVsmiwIuiUQjks5L2sja2tXE7Nyr57LNcT4/JO7NxDRowHIeJ3K8tQs7D0tkI5KVsS8xsU7295riPAkLWcK7ROcQ2XfK+Ms/wB4fNOqBp+jSCNSNaoWyFSYh5KlRm7JAE4pjJOiV0oGpA8SAr6IoRzV1FVtPE2N07x6aeaFv4tITlQdKV/NDaKSYdupLqD2DtDG80JaTlm0116fRWLXxuFmpqaVoB5AnZLoOwhcS0WZf2qN7uxi7+8c+uYyCszdqIg2oDiaVIyyy0run0DTDtEpPgvO7T21mq661oB92tSW/IrPW/is0xOJI51dq0GXQZbqkhUeo23tHZojR8ra8m1d50UDO19jP+cB4td9F5IaqJzyqURHqls7dWRmTb8hz91tG+bqIY/9ITdrOfjJ/tXnl9PaqyKzdf8AEH/p2/8AcP8A8pHdvXEZWdled8keVPmsNdSBzuSMhZsZe20+zIh/K4/+yo2jtdaHH/Eu02Y0Ab61119As856aHBOhWaAdq7T/quz6M5AZZZaKeDthaW/th38bWn1FD5rO5HRNIVJCs17+28xGTIh8HfNyYe2s3Jg/l+pWSvKN7lSihWzWntTOf8ANp4NYPkmfr+alMd3LavnSqyGMUw2kqlAnRs/19aNpnZfw/TNIeP2iv8AjHyb9Fi3W0potx5lV9YtmyPHrR/qu9KfkoXdrJxlin+ln0WUdxE81CbYlhhsIBxU0VVvI+zDOSc3sqyuhHxXn/fE7cMyEMzgjFhkccqE+C0sfZqMaq3ZbAyM5OI8FnLkTKBlltMwoC2o6nPL73RKJ27qjpWnkiAjYMzn1KT2pjeXoosHQxkbTmC74k0p4qC0yRt1bf8Ajl8SpjxBpyABrtmVz7RQZsaBsnomgDaJpHVAaGDkBn5lB7bxK4CHPJdpQHMVyJrsUR4xJPK661wa0Zd2ra+J38NFnrTwotrU59AVpChtOgOZi05H4rRWK1iVuR7wGY3rTMjos9PZznzCZY3lrgeRW+LRno0Ul5QPn2WhsXCmuaHNF4HYZnyXS8FJPdicRz7oz+JWX2RHlmUI6ZKGSJeh2Lsywt7zTXqdPqqVu7MxjPvno2mXmhc0QcGYB7VC4LUW7gDhm1rqdQgs1iLToVvGafgzkmiimuZyUz400RHktaIbIg9w6p2OrIs53Ub7NVOhWQlyS6pPZwN08xtPNNRE2dC0HQJXRk6JrBdNQrLJQdVokvZLZRkeRkmF1U/js7LPCJpBW/URR1oXkauJ2YPVYgdq7TU0LKHK7caR6jXrqkqb/n0Xmkr9m0bAq00JCrdnuMY7DeoHt1AyBB0I/JX5fuq0qjKwe8KN6tSKGRvJAisSm1Tykw0WJnvItgG48wkHEWbuHmsuyJ2lE50LtNl4OT1qNQOIM5gpTbWrNRWZ4NVbAfyp0RkVBh04OuibBdft5odFZ389Dop2teNAPFFBQYhszAa1A8ApnMYNc+hQNrnjcD1UjpzStfNKmKgq6ZugaEP4hZWv1B+Cpx28DU08PvorY4owAUrVOmgAr+GMYa3SRv8A3WX4vZ7jzdyac8lvJJxJlSqE27hZe0jILo4ptPsicbQA4D2hdZ3GmYdrXbqEdf2ifUODsuVVnZOCOBzU1l4adPJazhBvREZNI2Nn7WNpmfh81fb2iicNRXksM/gj9QCojwmTqo+uH6PT/Dcy8Za/usNDltWqS0Bpb3g0Zcs1iW2WUcx4Kw1s1KElS4JeGUpDuI2NgFGtzQeSo2RkWSTWq6ThLnbraPLXRnLjvwZ10tVwKJycCfsq7rBI3Ki2XLF+zLD/AAqOblXVR3wFaksUnVU3Wc7gpqa9Cyx7J+gTXSBDuN8VZZw0Ft5zgSG3ruQp0O5Qzh/HzI1xusBbcIF4tABJqS6hyaBmeq2V1ZObdI0fbGxiezWeSgN1jo6VORaJCTSupEbds9l5bbIrjy2oNMqjMV3z3zWktvatzaxxESMEr5bzw4ZvAFIxW81opUEm9Uk5ElZ2S2OII7oBNaNa0eoFfVTwQcbT8G3NOMopLyjrDbHxOvsNDSnMEHYha3g3F8YEOo141GxruKrF1XVW/Rzno91RyXRtUrD2LiUkZ7rjT8Jzb5bfBayyWkSMDxvqORGoUvrwKh5UZTykopE0bn9dTjlU0zoMqcgpGdoJ92tOWtPoqxp8VNFDtzXlVH8PS7vyWIe0U9SS1pFMhQ60y35qT9f2g0o1gp+7XKgp810dmViKLop/n8B3+lT9ZTmlfxVOuY5H0SxWqfIk7k02Ndj0RJsHRW4YBuEaX4FMH4zzsRnTU6bqWOyvdzp4/fNF4om8lciY0aBToQHj4Ua5lXIuGBFGkJwAS0xFJljonGzDeqvByW8EWIDz2Bp2UHsQGmqOOCiezojTGD2srkV1yitVCeGgpWMFTxqo+Io8YkogCNUABZA7kVO2F3JGg1oSGVvJJzKBXs55JkkB/CjEfeNdlbbZmjNCYWZC0WU8kPmstdluLY1m4VEWJrtgB6rRTaCkzy/tV2TNqay6Q1zSe8QT3TqMutCstxLgI4fC973l8krTEwABoFaFzsySaBvmQvcp+Gj9leI/pY4gH2sQtNRA26TtfdRzqeAuj4Ls+Pyym8ejHkjGK0vJiFyVwSLvOQ5cuXIA5G+zFuuvwj7rzl0dT56eSCK7waYMnic4VAe2o6VzQwNu5ijLFubD2dY4i8ASDpUgUUs/ZqAuNAW9G1ouT/RE1fBJg+Nqu2dm6rxtV2Bq4mdaLUbVYhaoQCNQp4ismxlm4p4WKniqSKdSOggxqsNQz2gqaOdIVBBrk/EVJsimaUrFROZE5r1XDkuIiwottcEjyCq7XqRpSbCiGQAJhlopZW1VOZiLKoldaSozaCoMQBIXIHRKZk+KIu3ChcKKxEKDLVAFyNt0U5Lp7Tl8lWN47pzINyU7JokMV/XRTNAAySMjAGvwUUjaKrAW32pkTHSO0a1zj4AElfLXaS1NltU8rPdkle8fzOLvmvpLjdlx7PLCHXTJG9l7Whc0itN9V8z8Xsb4ZnxSCj2G64dRuOYIoQeRXd8Krb9mPP1AppaKSGEk9N/DdS2qMN93Q6V1+C9Czloqrly5MRy5cuQB9B9jeJNnssclW3i0B939l4FHAjbnTkVPaIDeNHGi86/RJOR7S3mIjTbIyD5reG0U3Xm8sMzaR3cbuKZWhjKvQCmqpskUhlXO+zRBDFCkbIEJxVNG+qhoZcxVLG5Ug5TYiTAvMfzUjJQh2KnREpNBQUEqlEqoNCtxsoM9VDHRK2RSsBKdDGM666qZkza0Hl+amxDRCdUrnUT3WppN2oryTBUNJIzGiQHMYT4KpafyVLiHF6uDQKAa9TmEKntjnXszma/RUosdBhz2g655/lVILXGMq1yr5rO42ep1TXE61V5GHncWA20PpzU7OMtAzH3881mnTDzSPnASyFIPO4mb1QetNsk53GjU10OmWmVKBZ4nPJw0rXknMnFQTmKIofRon8VPPl/ZRHjR0J5rNutZcTsPl48011srpkRqQhRF0aVvEjQ0NaaD6oTxvh9mteVoiaSAAHe64eDxmqXtfXMeqjda65lVHSdpg6MH2v7PezSkwx/8kgXe8XUcG969U12J5aLJWipzccz5r1PjfEmsdZ3e+5s94t/dcLgvdPfP8h5LBdrYI2zHCY9g3a5jGBpyybcc4O8a+AXq/H5JNJSOXmgkrQCXLly6jkOXLlyANt+i/ijY5pIn5NkZeB/fZU0+LS7yXojOJQU71AdxQrw/hVpdHMx7dQ4Zc65EeRK9NfJmuL5Malf6dPDLqg8wZdVIxqjbG7lopRG7kuDR1UMAUzDQLmQnLmpcHNJyKoewJz6rgBun2iQAAKbHQ1popoZKKhj1KWJ5r4oYUE22nkrLbbQZ778uSEmcDzTPaMqqGh0XZ+IODq11+R0UVrthqCEPmn1PVV8XOqpREaWwTZg18XHWtEeY6uSxUU7roWnZPRgprQfkokgaKPFYW1NAhMsNM0Vlk1J5obJS8VSfQ0UJWUNVGZhSi62ynMFDsVUuxPosvdXdRvlpvVV79PionyUNFRNlxloyp90TXT81QlkpXNdi1aa6k6p5FZbmloMjlyVfFI6KMPprmue+tTXNUoisOWJsZiEk5dnW6Adgbuu5qDl9UM7QdobJBG9sTAZLpu3iXG9kG1qdMydvd8UD7UTTezxhocBG5xdQH3TmD4B17+rosFaHkkkknxXRwfH1230RycygqS7C8/H3uBJF6Qkd52bWgaCNmjT73e1zypnWHi9uxA03qilC3PItyac+baV61O6FAp7qfMfRegoJHG5tka5cuVEHLly5AF/glmvyty7rTePw09aLctnNBTRZfhE7I2htHFzzVxu5NGgzrnr6rRtyAC5eftm/GqR6lHEKbdMs1GGgK9K2n30Q2V5qvEs9EV1AqskutFHa5DzUQcrQMQycylnKqPKniOSsRzcgpGPUT3KEvKQEofUqOaZQFxCjeckxNk75ahdZwXGirNfp8VZsDyAT1Q2JdhqKMChOwrRXYLYHfAKjI+gXWJtS7pRZlk9stgqRTaqD261EjLUeqltWo/iVCQaqkIg9oJzKrSTbrgNVUecneBWqRm2PfOoZHnxPmrnCLE2VxDq5EaeNEYFhZccGi7teFCdaaurzVWk6BJszkETnaDxJ0CsWaztIBL9TQUDaE9CXBaTiPD44hdY3O5Qvd3nGnOuXosG/tTOwsaBHSp/Z0o4jY5jLQpwvkvPobSj2zTmwFpzic8a1dI2OvQN1PiD/AHjPDy54JYWU/BL3OdCK5+fih8HHZpXlji0CmrRQ+aq2uBt8EgOcC0XnZnvGngctMkKDXlj69BS0cJjrefedQ+6WGS7vk1pPXxQ/jNlspIa6NrXEe+4GJ+eQIaWZ/ElFLLwtsZe9rnVG1RdOooWgUIySxyOBBB1ZeoA0CtdKAUompU+mJx67Ribb2Ucc4SZB4x112oc/RVH9l5WirwdK3GXXuH8V0mi27rY5pJownLMsZuM9ldsHGZHAijAL5bkCK0pvXXwXQvk8iXpmL+PB+OjzJ3CAD3i5uVcwPnRV5eHEe64H0K9St3D47QTfFKU90nkedV51aIA17wCciRnTMZa5dV2cHKuReOzj5uOXG/PQJwc6aHr9U4wkatr1zU5bV1PH5pIzRxFAa886eC3yiEx1mlbXQjo018qjVaJnGoaZvcDuCyufiCs4Mz5575KtiFZy44y8mqm0f//Z" alt="Photography">
+      <h2>Photography</h2>
+      <p>I love capturing the beauty of nature and moments with my camera. It's both relaxing and rewarding.</p>
+      <a href="https://www.nationalgeographic.com/photography">Learn More</a>
+    </section>
+
+    <section class="hobby">
+      <img src="https://imgs.search.brave.com/dIlr-KNQahhNp4y7Ac5ixBMso6sAC2tRgse635EgARo/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTE4/MzE4Mzg0MC9waG90/by9jbG9zZS11cC1z/aG90LW9mLWZlbWFs/ZS1hcnRpc3QtaGFu/ZC1ob2xkaW5nLXBh/aW50LWJydXNoLWFu/ZC1kcmF3aW5nLXBh/aW50aW5nLXdpdGgt/cmVkLXBhaW50Lmpw/Zz9zPTYxMng2MTIm/dz0wJms9MjAmYz1v/QWZldldtQkJGQ1pu/dHB3cGhEN3MwVXVf/YmM1QUlLTEVjV1Vf/OG5OY0lvPQ" alt="Painting">
+      <h2>Painting</h2>
+      <p>Painting allows me to express emotions through colors and brushstrokes. I mostly use acrylics and watercolors.</p>
+      <a href="https://www.youtube.com/results?search_query=painting+for+beginners">Watch Tutorials</a>
+    </section>
+
+    <section class="hobby">
+       <img src="https://imgs.search.brave.com/6h7E8fkAQU15ATCcUgQoAVd302Zr0A3_EsbEzqaVPtk/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTEy/NTcwNzM3NS9waG90/by9idXNpbmVzc21h/bi1nb2luZy10by1v/ZmZpY2Utb24tYmlj/eWNsZS5qcGc_cz02/MTJ4NjEyJnc9MCZr/PTIwJmM9Z25VZ2xy/YnU4ajBnN29ETnNt/U0tNem9ZMV9Ibzdz/R1oweFNib1ZYa1Nf/OD0" alt="Cycling">
+      <h2>Cycling</h2>
+      <p>Cycling keeps me fit and lets me explore new places in my city. Early morning rides are the best!</p>
+      <a href="https://www.cyclingweekly.com/">Explore More</a>
+    </section>
+
+    <section class="hobby">
+      <img src="https://imgs.search.brave.com/fVUehu9ee3PCBXBCMhTYLqKgi9jGJb1DpoQYP5mXbmU/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTI5/NzY0Mzk2NC9waG90/by9tYW4taW4tdGhl/LWtpdGNoZW4tY29v/a2luZy10YXN0aW5n/LmpwZz9zPTYxMng2/MTImdz0wJms9MjAm/Yz1aQmVGYWdrYk92/eU1ET1YyNy1EWWQ0/TGRMYURnY2J5c1hQ/TldiNUk5cjFRPQ" alt="Cooking">
+      <h2>Cooking</h2>
+      <p>Cooking is a creative outlet for me. I enjoy trying new recipes and experimenting with different ingredients.</p>
+      <a href="https://www.allrecipes.com/">Explore Recipes</a>
+    </section>
+
+    <section class="hobby">
+      <img src="https://imgs.search.brave.com/OU769k_4HWLcjoTyt_Fknuea1RCTUkjVL4AD5KA4Rsw/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAxLzUxLzE5Lzg5/LzM2MF9GXzE1MTE5/ODk3OF9ieWRuaEpH/ZnNTT2JwRDU1aGd4/UzVDcWE5UU9jRVVa/Zi5qcGc" alt="Playing Chess">
+      <h2>Playing Chess</h2>
+      <p>Chess sharpens my mind and improves my strategic thinking. I enjoy playing online and solving puzzles.</p>
+      <a href="https://www.chess.com/" >Play on Chess.com</a>
+    </section>
+  </main>
+</body>
+</html>
